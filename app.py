@@ -836,7 +836,7 @@ def cargar_usuarios():
         admin_default = {
             "admin": {
                 "nombre": "Administrador Principal",
-                "password": generate_password_hash("admin123"),
+                "password": generate_password_hash("R409LCxDsGxq560fE6Pd4kqf87xgj"),
                 "is_admin": True
             }
         }
