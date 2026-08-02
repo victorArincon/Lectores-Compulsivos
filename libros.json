@@ -7,7 +7,10 @@
     "disponible": true,
     "portada": "https://covers.openlibrary.org/b/id/13574150-L.jpg",
     "prestado_a": [
-      "vito"
+      {
+        "uid": "vito",
+        "fecha_limite": "2026-08-09"
+      }
     ],
     "anio_publicacion": 1813,
     "paginas": 351,
@@ -31,12 +34,10 @@
     "titulo": "El alquimista",
     "autor": "Paulo Coelho",
     "isbn": "978-0062502179",
-    "cantidad": 2,
+    "cantidad": 3,
     "disponible": true,
     "portada": "https://covers.openlibrary.org/b/isbn/978-0062502179-L.jpg",
-    "prestado_a": [
-      "vito"
-    ],
+    "prestado_a": [],
     "anio_publicacion": 1988,
     "paginas": 197,
     "sinopsis": "El alquimista narra el viaje de un joven pastor andaluz llamado Santiago. Convencido de que un sueño recurrente es profético, Santiago decide viajar hasta las pirámides de Egipto en busca de un tesoro. En el camino, se encuentra con el amor, el peligro, la oportunidad y el desastre. Uno de los personajes importantes que conoce es un anciano rey llamado Melquisedec, quien le dice que \"cuando quieres algo, todo el universo conspira para ayudarte a conseguirlo\". Esta es la filosofía central y el motivo recurrente del libro.",
@@ -241,10 +242,15 @@
     "titulo": "Don Quijote de la Mancha",
     "autor": "Miguel de Cervantes",
     "isbn": "978-8420412147",
-    "cantidad": 3,
+    "cantidad": 2,
     "disponible": true,
     "portada": "https://covers.openlibrary.org/b/id/12449844-M.jpg",
-    "prestado_a": [],
+    "prestado_a": [
+      {
+        "uid": "vito",
+        "fecha_limite": "2026-08-23"
+      }
+    ],
     "anio_publicacion": 1605,
     "paginas": 863,
     "sinopsis": "Las aventuras del ingenioso hidalgo don Quijote de la Mancha y su fiel escudero Sancho Panza a través de los caminos de España.",
