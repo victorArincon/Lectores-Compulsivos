@@ -1,0 +1,59 @@
+/* Estilos propios de Lectores Compulsivos, encima de Bootstrap 5 (data-bs-theme="dark") */
+
+body {
+    min-height: 100vh;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+/* Tarjeta de libro */
+.book-card {
+    transition: transform .15s ease, box-shadow .15s ease;
+    height: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .4);
+}
+
+/* Portada real del libro */
+.book-cover-img {
+    aspect-ratio: 2 / 3;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: calc(.5rem - 1px);
+    border-top-right-radius: calc(.5rem - 1px);
+}
+
+/* Respaldo cuando un libro no trae campo "portada" */
+.book-cover {
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    border-top-left-radius: calc(.5rem - 1px);
+    border-top-right-radius: calc(.5rem - 1px);
+}
+
+.cover-0 { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+.cover-1 { background: linear-gradient(135deg, #d31027, #ea384d); }
+.cover-2 { background: linear-gradient(135deg, #11998e, #38ef7d); }
+.cover-3 { background: linear-gradient(135deg, #f7971e, #ffd200); }
+.cover-4 { background: linear-gradient(135deg, #834d9b, #d04ed6); }
+.cover-5 { background: linear-gradient(135deg, #232526, #414345); }
+
+/* Fondo de la pantalla de login */
+.login-bg {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #2c2f4a, #14162b 70%);
+}

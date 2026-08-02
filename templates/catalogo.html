@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Catálogo{% endblock %}
+{% block heading %}Catálogo de Libros{% endblock %}
+
+{% block content %}
+{% from "modal_libro.html" import modal_libro %}
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for libro in libros %}
+    <div class="col">
+        <div class="card book-card border-secondary-subtle">
+            {% if libro.portada %}
+            <img class="book-cover-img" src="{{ libro.portada }}" alt="Portada de {{ libro.titulo }}">
+            {% else %}
+            <div class="book-cover cover-{{ loop.index0 % 6 }}">
+                {{ libro.titulo }}
+            </div>
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+                <h6 class="card-title mb-1">{{ libro.titulo }}</h6>
+                <p class="card-text text-secondary small mb-2">{{ libro.autor }}</p>
+                <p class="card-text small mb-2">
+                    {% if libro.disponible %}
+                    <span class="badge text-bg-success">Disponible</span>
+                    {% else %}
+                    <span class="badge text-bg-danger">Agotado</span>
+                    {% endif %}
+                    <span class="text-secondary">· {{ libro.cantidad }} en stock</span>
+                </p>
+                <button type="button" class="btn btn-outline-info btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#libroModal{{ loop.index }}">
+                    Detalles
+                </button>
+                <div class="mt-auto">
+                    {% if libro.disponible %}
+                    <form method="POST" action="{{ url_for('prestar', isbn=libro.isbn) }}">
+                        <button type="submit" class="btn btn-primary btn-sm w-100">Prestar</button>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{{ url_for('devolver', isbn=libro.isbn) }}">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm w-100">Devolver</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {{ modal_libro(libro, "libroModal" ~ loop.index) }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

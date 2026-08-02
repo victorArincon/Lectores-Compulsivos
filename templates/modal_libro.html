@@ -1,0 +1,40 @@
+{% macro modal_libro(libro, modal_id) %}
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-hidden="true" aria-labelledby="{{ modal_id }}Label">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-secondary-subtle">
+                <h5 class="modal-title" id="{{ modal_id }}Label">{{ libro.titulo }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-4">
+                        {% if libro.portada %}
+                        <img src="{{ libro.portada }}" class="img-fluid rounded" alt="Portada de {{ libro.titulo }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-8">
+                        <p class="mb-1"><strong>Autor:</strong> {{ libro.autor }}</p>
+                        <p class="mb-1">
+                            <strong>Año de publicación:</strong>
+                            {{ libro.anio_publicacion if libro.anio_publicacion else "No disponible" }}
+                        </p>
+                        <p class="mb-1">
+                            <strong>Páginas:</strong>
+                            {{ (libro.paginas ~ " páginas") if libro.paginas else "No disponible" }}
+                        </p>
+                    </div>
+                </div>
+                <hr class="border-secondary-subtle">
+                <h6>Sinopsis</h6>
+                <p class="small" style="white-space: pre-line">{{ libro.sinopsis if libro.sinopsis else "Sinopsis no disponible." }}</p>
+                <h6>Sobre {{ libro.autor }}</h6>
+                <p class="small" style="white-space: pre-line">{{ libro.autor_bio if libro.autor_bio else "Biografía no disponible." }}</p>
+            </div>
+            <div class="modal-footer border-secondary-subtle">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
