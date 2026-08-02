@@ -24,12 +24,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('catalogo') }}">Catálogo</a>
                     </li>
+                    
+                    <!-- Solo visible para usuarios normales (no administradores) -->
+                    {% if not session.get('is_admin') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('mis_prestamos') }}">Mis Préstamos</a>
                     </li>
+                    {% endif %}
+
+                    <!-- Opciones exclusivas para el Administrador -->
                     {% if session.get('is_admin') %}
                     <li class="nav-item">
                         <a class="nav-link text-warning" href="{{ url_for('crear_usuario') }}">Crear Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="{{ url_for('admin_prestamos') }}">Gestión de Préstamos</a>
                     </li>
                     {% endif %}
                 </ul>
