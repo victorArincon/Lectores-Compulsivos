@@ -808,6 +808,7 @@ if __name__ == "__main__":
         print(f"Aviso al cargar estado previo: {e}")
 
     app.run(debug=True, port=5000)'''
+
 ''' version 4
 import os
 import json
@@ -1112,12 +1113,7 @@ def devolver(isbn):
 
 # EJECUCIÓN LOCAL
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
-
-
-# EJECUCIÓN LOCAL
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)   '''
+    app.run(debug=True, port=5000)'''
 
 import os
 import json
