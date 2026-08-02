@@ -1,12 +1,12 @@
 {
     "admin": {
         "nombre": "Administrador Principal",
-        "password": "scrypt:32768:8:1$ukkqpoyKmT4g8ZY6$d5f17d3ecebd515a104741efdacb55d89240a1d17b57f956e1e80b271f73b82dbd73bbfc37756f4fb258e74a49361f17e8519fe956dae2e1a7d71d130dc63e32",
+        "password": "scrypt:32768:8:1$GFTqeGuTpVbp3tNI$4c6a96df13dc9d8124695418124ddfa57096e84104528bebebaf72ae4fd62578e038bb5123e57a8a34295d78cbbe6a6f8a1b63c4a2e78eb19185152b0248fe0f",
         "is_admin": true
     },
     "vito": {
-        "nombre": "vito123",
-        "password": "scrypt:32768:8:1$oW8JPWohsJQqb6KZ$390464a464dd49304d7929b9b093ca3e2e5e9e2fa4e900ebc52e9548ae5fb7f7bdf4605b25e150b457da9f955b09508d4bc2fde4e1628df7f8aae32a859f393d",
+        "nombre": "Víctor",
+        "password": "scrypt:32768:8:1$2KGvUKREcCNQBiyb$f18a62a374536881bae1c39e9d910596277da132d725234e7bfdccb368c522943233ef17111742d3106bf266112de64cb58a0854578ff2cddfc21ce1e9f7abb6",
         "is_admin": false
     }
 }
