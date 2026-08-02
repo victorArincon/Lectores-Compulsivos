@@ -31,14 +31,36 @@
                     Detalles
                 </button>
                 <div class="mt-auto">
+                    {% if session.get('is_admin') %}
+                    <!-- VISTA DE ADMINISTRADOR: Solo gestión de stock -->
+                    <div class="mb-2 small text-secondary">
+                        {% if libro.prestado_a %}
+                        <span class="text-warning">({{ libro.prestado_a | length }} ejemplar(es) en préstamo activo)</span>
+                        {% endif %}
+                    </div>
+                    <form method="POST" action="{{ url_for('admin_agregar_stock', isbn=libro.isbn) }}">
+                        <div class="input-group input-group-sm mb-1">
+                            <input type="number" name="cantidad_extra" value="1" min="1" class="form-control form-control-sm text-center" title="Cantidad a agregar">
+                            <button type="submit" class="btn btn-outline-warning btn-sm">Añadir Stock</button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <!-- VISTA DE USUARIO NORMAL -->
                     {% if libro.disponible %}
                     <form method="POST" action="{{ url_for('prestar', isbn=libro.isbn) }}">
+                        <div class="input-group input-group-sm mb-2">
+                            <label class="input-group-text" for="dias{{ loop.index }}">Plazo</label>
+                            <select name="dias" id="dias{{ loop.index }}" class="form-select form-select-sm">
+                                <option value="7">7 días</option>
+                                <option value="14">14 días</option>
+                                <option value="21">21 días</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-sm w-100">Prestar</button>
                     </form>
                     {% else %}
-                    <form method="POST" action="{{ url_for('devolver', isbn=libro.isbn) }}">
-                        <button type="submit" class="btn btn-outline-secondary btn-sm w-100">Devolver</button>
-                    </form>
+                    <button type="button" class="btn btn-outline-secondary btn-sm w-100" disabled>No disponible</button>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
