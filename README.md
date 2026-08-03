@@ -17,10 +17,9 @@
 •	Frontend: HTML5, Jinja2, Bootstrap 5, CSS personalizado
 •	Persistencia de Datos: Almacenamiento local mediante archivos JSON estructurados
 
-<img width="1384" height="795" alt="Screenshot 2026-08-03 at 6 11 38 PM" src="https://github.com/user-attachments/assets/a5f83e4d-10a9-4e80-af74-2d876d9315c5" />
-<img width="1384" height="799" alt="Screenshot 2026-08-03 at 6 11 27 PM" src="https://github.com/user-attachments/assets/b995ea43-8801-4b01-8cca-6cb1d97b2790" />
-<img width="1383" height="792" alt="Screenshot 2026-08-03 at 6 11 10 PM" src="https://github.com/user-attachments/assets/85eba97c-e460-49eb-8c73-1ed610f1b92d" />
-<img width="1382" height="797" alt="Screenshot 2026-08-03 at 6 10 57 PM" src="https://github.com/user-attachments/assets/f1e6f170-db76-4973-8b15-0ac43129f7f5" />
-<img width="1377" height="794" alt="Screenshot 2026-08-03 at 6 10 42 PM" src="https://github.com/user-attachments/assets/87e7f585-15d0-4773-87c3-349a26fcc037" />
-<img width="1373" height="792" alt="Screenshot 2026-08-03 at 6 10 23 PM" src="https://github.com/user-attachments/assets/61e3e0ef-5035-43a8-ad72-fed85f7ec83c" />
-<img width="1381" height="796" alt="Screenshot 2026-08-03 at 6 10 08 PM" src="https://github.com/user-attachments/assets/9c5f681a-43c3-4273-8a87-c6e051d8f823" />
+<img width="1373" height="792" alt="Screenshot 2026-08-03 at 6 10 23 PM" src="https://github.com/user-attachments/assets/ee5aa89e-1b5b-474c-a543-122a270447f2" />
+<img width="1377" height="794" alt="Screenshot 2026-08-03 at 6 10 42 PM" src="https://github.com/user-attachments/assets/ce1b14a4-1e21-4b2f-8b3c-b5d5d7541277" />
+<img width="1381" height="796" alt="Screenshot 2026-08-03 at 6 10 08 PM" src="https://github.com/user-attachments/assets/dc66643f-d1e8-46f7-bf34-66f73f941c11" />
+<img width="1384" height="799" alt="Screenshot 2026-08-03 at 6 11 27 PM" src="https://github.com/user-attachments/assets/aea872a5-c319-4f64-ba03-fa78925c8c5d" />
+<img width="1384" height="799" alt="Screenshot 2026-08-03 at 6 11 27 PM" src="https://github.com/user-attachments/assets/6912f8a8-973f-4103-9f19-f863bccd4d8f" />
+<img width="1382" height="797" alt="Screenshot 2026-08-03 at 6 10 57 PM" src="https://github.com/user-attachments/assets/7e2eaed6-0f0f-4006-b53b-612aa9b4ff28" />
