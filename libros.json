@@ -60,10 +60,15 @@
     "titulo": "El proceso",
     "autor": "Franz Kafka",
     "isbn": "978-8420674254",
-    "cantidad": 3,
+    "cantidad": 2,
     "disponible": true,
     "portada": "https://covers.openlibrary.org/b/id/997423-L.jpg",
-    "prestado_a": [],
+    "prestado_a": [
+      {
+        "uid": "yari",
+        "fecha_limite": "2026-08-10"
+      }
+    ],
     "anio_publicacion": 1925,
     "paginas": 269,
     "sinopsis": "Novela laberíntica y opresiva sobre un hombre arrestado por la policía secreta y acusado de un delito sin especificar. Incapaz de defenderse y desorientado por el proceso legal que se despliega a su alrededor, el hombre pronto cae en la apatía y la resignación, aceptando como inevitable la sentencia que finalmente recibirá.",
@@ -73,10 +78,15 @@
     "titulo": "Crimen y castigo",
     "autor": "Fyodor Dostoevsky",
     "isbn": "978-8420637334",
-    "cantidad": 3,
+    "cantidad": 2,
     "disponible": true,
     "portada": "https://covers.openlibrary.org/b/id/12328823-L.jpg",
-    "prestado_a": [],
+    "prestado_a": [
+      {
+        "uid": "yari",
+        "fecha_limite": "2026-08-10"
+      }
+    ],
     "anio_publicacion": 1866,
     "paginas": 520,
     "sinopsis": "Crimen y castigo (en ruso, Преступлéние и наказáние) es una novela del autor ruso Fiódor Dostoyevski. Se publicó por primera vez en la revista literaria El mensajero ruso, en doce entregas mensuales a lo largo de 1866. Más tarde se editó en un solo volumen. Es la segunda de las novelas extensas de Dostoyevski tras su regreso de diez años de exilio en Siberia. Crimen y castigo se considera la primera gran novela de su período de madurez como escritor.\n\nCrimen y castigo se centra en la angustia mental y los dilemas morales de Rodión Raskólnikov, un exestudiante empobrecido de San Petersburgo que idea y ejecuta un plan para matar a una prestamista sin escrúpulos y quedarse con su dinero. Raskólnikov sostiene que con el dinero de la prestamista podrá realizar buenas acciones que compensen el crimen, a la vez que libra al mundo de un ser despreciable. También comete el asesinato para poner a prueba su propia hipótesis de que algunas personas están naturalmente capacitadas para hacer ese tipo de cosas, e incluso tienen derecho a hacerlas. A lo largo de la novela, Raskólnikov justifica varias veces sus actos comparándose con Napoleón Bonaparte, convencido de que el asesinato es permisible en la búsqueda de un propósito superior.",
@@ -754,10 +764,15 @@
     "titulo": "Conversación en La Catedral",
     "autor": "Mario Vargas Llosa",
     "isbn": "978-8437609256",
-    "cantidad": 3,
+    "cantidad": 2,
     "disponible": true,
     "portada": "https://covers.openlibrary.org/b/id/2295281-M.jpg",
-    "prestado_a": [],
+    "prestado_a": [
+      {
+        "uid": "yari",
+        "fecha_limite": "2026-08-17"
+      }
+    ],
     "anio_publicacion": 1969,
     "paginas": 736,
     "sinopsis": "Fresco monumental y laberíntico sobre la corrupción política y social en el Perú durante la dictadura de Manuel Odría.",
