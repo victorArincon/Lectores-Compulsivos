@@ -13,5 +13,10 @@
         "nombre": "Prueba",
         "password": "scrypt:32768:8:1$QJ3YLifrjPn0NAsv$dd16d2f337a220106b87d420672e7a6fbba6cceb8297896903b46dc34ac7080e60767fb1c87fbc7da12e881bed65625e777095f5001d33b56aca5b012cc5e627",
         "is_admin": false
+    },
+    "yari": {
+        "nombre": "yarianny",
+        "password": "scrypt:32768:8:1$xHkrzhupVxnAFIBi$f1df3689aac91416a6b2ec8793609bf95592cf98fc282ffd199eab7bbc3bb77ecd9b4afc1120ee2bb5c3de2d1e8b1e99ae6487c3b25fab59846332aeadf80916",
+        "is_admin": false
     }
 }
