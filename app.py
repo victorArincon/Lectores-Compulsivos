@@ -1736,7 +1736,6 @@ def login():
         if usuario_input in usuarios_db:
             pass_registrada = usuarios_db[usuario_input]["password"]
 
-            # Soporta tanto texto plano como hash antiguo por seguridad
             if pass_registrada == password_input or check_password_hash(pass_registrada, password_input):
                 session.clear()
                 session["usuario_id"] = usuario_input
@@ -1885,6 +1884,8 @@ def mis_alquileres():
 
                 dias_restantes = None
                 vencido = False
+                fechas_ext = {"7": "", "14": "", "21": ""}
+
                 if fecha_limite_str:
                     try:
                         f_limite = datetime.fromisoformat(fecha_limite_str).date()
@@ -1893,6 +1894,13 @@ def mis_alquileres():
                         dias_restantes = delta
                         if delta < 0:
                             vencido = True
+
+                        # Cálculo de nuevas fechas exactas para el selector de extensión
+                        fechas_ext = {
+                            "7": (f_limite + timedelta(days=7)).strftime("%d/%m/%Y"),
+                            "14": (f_limite + timedelta(days=14)).strftime("%d/%m/%Y"),
+                            "21": (f_limite + timedelta(days=21)).strftime("%d/%m/%Y")
+                        }
                     except Exception:
                         pass
 
@@ -1904,7 +1912,8 @@ def mis_alquileres():
                     "dias_restantes": dias_restantes,
                     "vencido": vencido,
                     "extension_solicitada": extension_solicitada,
-                    "tiene_espera": tiene_espera
+                    "tiene_espera": tiene_espera,
+                    "fechas_ext": fechas_ext
                 })
 
     return render_template(
