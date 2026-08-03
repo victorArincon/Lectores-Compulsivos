@@ -1895,7 +1895,6 @@ def mis_alquileres():
                         if delta < 0:
                             vencido = True
 
-                        # Cálculo de nuevas fechas exactas para el selector de extensión
                         fechas_ext = {
                             "7": (f_limite + timedelta(days=7)).strftime("%d/%m/%Y"),
                             "14": (f_limite + timedelta(days=14)).strftime("%d/%m/%Y"),
@@ -1972,7 +1971,7 @@ def sugerencias():
             sugs = cargar_sugerencias()
             sugs.append({
                 "usuario": usuario.nombre,
-                "uid": usuario.id,
+                "uid": session.get("usuario_id", ""),
                 "titulo": titulo,
                 "autor": autor,
                 "comentario": comentario,
@@ -2166,6 +2165,22 @@ def admin_sugerencias():
         return "Acceso denegado.", 403
     sugs = cargar_sugerencias()
     return render_template("admin_sugerencias.html", sugerencias=sugs, usuario_actual=session.get("usuario_nombre"))
+
+
+@app.route("/admin/eliminar_sugerencia/<int:index>", methods=["POST"])
+def admin_eliminar_sugerencia(index):
+    if "usuario_id" not in session or not session.get("is_admin"):
+        return "Acceso denegado.", 403
+
+    sugs = cargar_sugerencias()
+    if 0 <= index < len(sugs):
+        eliminada = sugs.pop(index)
+        guardar_sugerencias(sugs)
+        flash(f"Sugerencia de '{eliminada.get('titulo', 'Libro')}' eliminada correctamente.", "success")
+    else:
+        flash("Sugerencia no encontrada.", "danger")
+
+    return redirect(url_for("admin_sugerencias"))
 
 
 @app.route("/admin/agregar_stock/<string:isbn>", methods=["POST"])
