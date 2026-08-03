@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Sugerir Libro{% endblock %}
+{% block heading %}Sugerir un Nuevo Libro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-secondary-subtle">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título del libro *</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required placeholder="Ej: Cien años de soledad">
+                    </div>
+                    <div class="mb-3">
+                        <label for="autor" class="form-label">Autor *</label>
+                        <input type="text" class="form-control" id="autor" name="autor" required placeholder="Ej: Gabriel García Márquez">
+                    </div>
+                    <div class="mb-3">
+                        <label for="comentario" class="form-label">Motivo o Comentario (Opcional)</label>
+                        <textarea class="form-control" id="comentario" name="comentario" rows="3" placeholder="Por qué te gustaría que esté en la biblioteca..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Enviar Sugerencia</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
