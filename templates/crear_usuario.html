@@ -1,46 +1,142 @@
 {% extends "base.html" %}
 
-{% block title %}Crear Usuario{% endblock %}
-{% block heading %}Registrar Nuevo Usuario{% endblock %}
+{% block title %}Usuarios{% endblock %}
+{% block heading %}Administración de Usuarios{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
+
+{% if mensaje %}
+<div class="alert alert-{{ mensaje.tipo }}" role="alert">
+    {{ mensaje.texto }}
+</div>
+{% endif %}
+
+<!-- SECCIÓN 1: SOLICITUDES PENDIENTES DE REGISTRO -->
+<div class="card shadow-sm border-secondary-subtle mb-5">
+    <div class="card-header bg-dark text-warning fw-bold">
+        Solicitudes de Registro Pendientes
+    </div>
+    <div class="card-body">
+        {% if solicitudes %}
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario (ID)</th>
+                        <th>Nombre Completo</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in solicitudes %}
+                    <tr>
+                        <td class="text-secondary small">{{ s.fecha }}</td>
+                        <td><code>{{ s.username }}</code></td>
+                        <td>{{ s.nombre }}</td>
+                        <td class="text-end">
+                            <form method="POST" class="d-inline">
+                                <input type="hidden" name="accion" value="aceptar_solicitud">
+                                <input type="hidden" name="username" value="{{ s.username }}">
+                                <button type="submit" class="btn btn-success btn-sm me-1">Aceptar</button>
+                            </form>
+                            <form method="POST" class="d-inline">
+                                <input type="hidden" name="accion" value="rechazar_solicitud">
+                                <input type="hidden" name="username" value="{{ s.username }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-secondary text-center py-2 mb-0">No hay solicitudes de registro pendientes.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- SECCIÓN 2: CREAR USUARIO MANUALMENTE -->
+<div class="row mb-5">
     <div class="col-md-6">
-        <div class="card shadow border-secondary-subtle">
-            <div class="card-body p-4">
-                
-                {% if mensaje %}
-                <div class="alert alert-{{ mensaje.tipo }}">{{ mensaje.texto }}</div>
-                {% endif %}
-
-                <form method="POST" action="{{ url_for('crear_usuario') }}">
+        <div class="card shadow-sm border-secondary-subtle h-100">
+            <div class="card-header bg-dark text-info fw-bold">
+                Crear Usuario Manualmente
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <input type="hidden" name="accion" value="crear">
                     <div class="mb-3">
-                        <label class="form-label">Usuario (ID para iniciar sesión)</label>
-                        <input type="text" name="username" class="form-control" placeholder="Ej: vito123" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nombre Completo</label>
-                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Víctor" required>
+                        <label for="username" class="form-label">Usuario (ID de acceso) *</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input type="password" name="password" class="form-control" placeholder="Contraseña segura" required>
+                        <label for="nombre" class="form-label">Nombre Completo *</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
-                    <div class="mb-4 form-check">
-                        <input type="checkbox" class="form-check-input" id="isAdmin" name="is_admin">
-                        <label class="form-check-label text-warning" for="isAdmin">
-                            ¿Es Administrador? (Tendrá privilegios para crear a otros)
-                        </label>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña *</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    
-                    <div class="d-flex justify-content-between mt-4">
-                        <a href="{{ url_for('catalogo') }}" class="btn btn-outline-secondary">Cancelar</a>
-                        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin">
+                        <label class="form-check-label text-warning" for="is_admin">Otorgar privilegios de Administrador</label>
                     </div>
+                    <button type="submit" class="btn btn-primary w-100">Crear Usuario</button>
                 </form>
+            </div>
+        </div>
+    </div>
 
+    <!-- SECCIÓN 3: LISTADO DE USUARIOS CREADOS -->
+    <div class="col-md-6">
+        <div class="card shadow-sm border-secondary-subtle h-100">
+            <div class="card-header bg-dark text-light fw-bold">
+                Usuarios Existentes en el Sistema
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                    <table class="table table-dark table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombre</th>
+                                <th>Rol</th>
+                                <th class="text-end">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for uid, datos in usuarios.items() %}
+                            <tr>
+                                <td><code>{{ uid }}</code></td>
+                                <td>{{ datos.nombre }}</td>
+                                <td>
+                                    {% if datos.is_admin %}
+                                    <span class="badge bg-warning text-dark">Admin</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">Usuario</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end">
+                                    {% if uid != 'admin' %}
+                                    <form method="POST" class="d-inline" onsubmit="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                                        <input type="hidden" name="accion" value="eliminar_usuario">
+                                        <input type="hidden" name="username" value="{{ uid }}">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                    </form>
+                                    {% else %}
+                                    <span class="text-muted small">Protegido</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
