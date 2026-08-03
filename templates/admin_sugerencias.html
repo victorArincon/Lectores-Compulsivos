@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block title %}Buzón de Sugerencias{% endblock %}
-{% block heading %}Libros Sugeridos por los Usuarios{% endblock %}
+{% block title %}Sugerencias de Libros{% endblock %}
+{% block heading %}Sugerencias Recibidas{% endblock %}
 
 {% block content %}
 <div class="card shadow-sm border-secondary-subtle">
@@ -16,23 +16,29 @@
                         <th>Título</th>
                         <th>Autor</th>
                         <th>Comentario</th>
+                        <th class="text-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for s in sugerencias %}
                     <tr>
                         <td class="text-secondary small">{{ s.fecha }}</td>
-                        <td>{{ s.usuario }} <span class="text-secondary small">({{ s.uid }})</span></td>
-                        <td><strong>{{ s.titulo }}</strong></td>
+                        <td><code>{{ s.usuario }}</code></td>
+                        <td class="fw-bold">{{ s.titulo }}</td>
                         <td>{{ s.autor }}</td>
-                        <td class="text-secondary">{{ s.comentario or 'Sin comentarios' }}</td>
+                        <td>{{ s.comentario or 'Sin comentario' }}</td>
+                        <td class="text-end">
+                            <form method="POST" action="{{ url_for('admin_eliminar_sugerencia', index=loop.index0) }}" class="d-inline" onsubmit="return confirm('¿Seguro que deseas eliminar esta sugerencia?');">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
         {% else %}
-        <p class="text-secondary text-center py-3 mb-0">No hay sugerencias registradas todavía.</p>
+        <p class="text-secondary text-center py-3 mb-0">No hay sugerencias de libros registradas.</p>
         {% endif %}
     </div>
 </div>
