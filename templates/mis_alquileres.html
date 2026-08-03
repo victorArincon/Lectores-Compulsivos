@@ -16,7 +16,7 @@
 
                 <div class="mt-auto">
                     <p class="mb-2 small">
-                        <strong>Fecha límite:</strong> {{ p.fecha_limite or 'No especificada' }}
+                        <strong>Fecha límite actual:</strong> {{ p.fecha_limite or 'No especificada' }}
                     </p>
                     {% if p.vencido %}
                         <div class="alert alert-danger py-1 px-2 small mb-2 text-center">
@@ -34,7 +34,7 @@
                         {% endif %}
                     {% endif %}
 
-                    <!-- RESTRICCIÓN DE EXTENSIÓN POR COLA DE ESPERA -->
+                    <!-- RESTRICCIÓN DE EXTENSIÓN POR COLA DE ESPERA O MOSTRAR FECHAS CALCULADAS -->
                     {% if p.tiene_espera %}
                         <div class="alert alert-secondary py-1 px-2 small mb-0 text-center">
                             Extensiones bloqueadas (Hay usuarios en lista de espera)
@@ -47,9 +47,9 @@
                         <form method="POST" action="{{ url_for('solicitar_extension', isbn=p.libro.isbn) }}">
                             <div class="input-group input-group-sm">
                                 <select name="dias_extra" class="form-select form-select-sm">
-                                    <option value="7">+7 días</option>
-                                    <option value="14">+14 días</option>
-                                    <option value="21">+21 días</option>
+                                    <option value="7">+7 días (Nueva: {{ p.fechas_ext['7'] }})</option>
+                                    <option value="14">+14 días (Nueva: {{ p.fechas_ext['14'] }})</option>
+                                    <option value="21">+21 días (Nueva: {{ p.fechas_ext['21'] }})</option>
                                 </select>
                                 <button type="submit" class="btn btn-outline-warning btn-sm">Pedir más días</button>
                             </div>
