@@ -34,8 +34,12 @@
                         {% endif %}
                     {% endif %}
 
-                    <!-- SECCIÓN DE EXTENSIÓN DE PLAZO -->
-                    {% if p.extension_solicitada %}
+                    <!-- RESTRICCIÓN DE EXTENSIÓN POR COLA DE ESPERA -->
+                    {% if p.tiene_espera %}
+                        <div class="alert alert-secondary py-1 px-2 small mb-0 text-center">
+                            Extensiones bloqueadas (Hay usuarios en lista de espera)
+                        </div>
+                    {% elif p.extension_solicitada %}
                         <div class="alert alert-warning py-1 px-2 small mb-0 text-center">
                             Solicitud pendiente (+{{ p.extension_solicitada }} días)
                         </div>
