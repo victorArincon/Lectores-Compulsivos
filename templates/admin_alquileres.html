@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Gestión de Préstamos{% endblock %}
-{% block heading %}Control y Confirmación de Devoluciones{% endblock %}
+{% block heading %}Gestión de Préstamos y Solicitudes{% endblock %}
 
 {% block content %}
 <div class="card shadow-sm border-secondary-subtle">
@@ -13,9 +13,9 @@
                     <tr>
                         <th>Usuario</th>
                         <th>Libro</th>
-                        <th>ISBN</th>
                         <th>Fecha Límite</th>
-                        <th class="text-end">Acción del Administrador</th>
+                        <th>Extensión Solicitada</th>
+                        <th class="text-end">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,11 +23,26 @@
                     <tr>
                         <td>{{ p.nombre_usuario }} <span class="text-secondary small">({{ p.uid }})</span></td>
                         <td>{{ p.titulo }}</td>
-                        <td><code class="text-light">{{ p.isbn }}</code></td>
                         <td>{{ p.fecha_limite }}</td>
+                        <td>
+                            {% if p.extension_solicitada %}
+                                <span class="badge bg-warning text-dark">+{{ p.extension_solicitada }} días</span>
+                            {% else %}
+                                <span class="text-secondary small">Ninguna</span>
+                            {% endif %}
+                        </td>
                         <td class="text-end">
+                            {% if p.extension_solicitada %}
+                            <form method="POST" action="{{ url_for('admin_resolver_extension', isbn=p.isbn, uid=p.uid, accion='aceptar') }}" class="d-inline">
+                                <button type="submit" class="btn btn-outline-success btn-sm me-1">Aceptar</button>
+                            </form>
+                            <form method="POST" action="{{ url_for('admin_resolver_extension', isbn=p.isbn, uid=p.uid, accion='rechazar') }}" class="d-inline me-2">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Rechazar</button>
+                            </form>
+                            {% endif %}
+
                             <form method="POST" action="{{ url_for('admin_confirmar_devolucion', isbn=p.isbn, uid=p.uid) }}" class="d-inline">
-                                <button type="submit" class="btn btn-success btn-sm">Confirmar Devolución</button>
+                                <button type="submit" class="btn btn-success btn-sm">Devolución</button>
                             </form>
                         </td>
                     </tr>
