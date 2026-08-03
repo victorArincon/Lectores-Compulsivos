@@ -1,72 +1,80 @@
 {% extends "base.html" %}
 
 {% block title %}Catálogo{% endblock %}
-{% block heading %}Catálogo de Libros{% endblock %}
+{% block heading %}Catálogo de Libros por Categorías{% endblock %}
 
 {% block content %}
 {% from "modal_libro.html" import modal_libro %}
-<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
-    {% for libro in libros %}
-    <div class="col">
-        <div class="card book-card border-secondary-subtle">
-            {% if libro.portada %}
-            <img class="book-cover-img" src="{{ libro.portada }}" alt="Portada de {{ libro.titulo }}">
-            {% else %}
-            <div class="book-cover cover-{{ loop.index0 % 6 }}">
-                {{ libro.titulo }}
-            </div>
-            {% endif %}
-            <div class="card-body d-flex flex-column">
-                <h6 class="card-title mb-1">{{ libro.titulo }}</h6>
-                <p class="card-text text-secondary small mb-2">{{ libro.autor }}</p>
-                <p class="card-text small mb-2">
-                    {% if libro.disponible %}
-                    <span class="badge text-bg-success">Disponible</span>
-                    {% else %}
-                    <span class="badge text-bg-danger">Agotado</span>
-                    {% endif %}
-                    <span class="text-secondary">· {{ libro.cantidad }} en stock</span>
-                </p>
-                <button type="button" class="btn btn-outline-info btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#libroModal{{ loop.index }}">
-                    Detalles
-                </button>
-                <div class="mt-auto">
-                    {% if session.get('is_admin') %}
-                    <!-- VISTA DE ADMINISTRADOR: Solo gestión de stock -->
-                    <div class="mb-2 small text-secondary">
-                        {% if libro.prestado_a %}
-                        <span class="text-warning">({{ libro.prestado_a | length }} ejemplar(es) en préstamo activo)</span>
+
+{% set categorias = libros | map(attribute='categoria') | unique | list %}
+
+{% for cat in categorias %}
+<div class="mb-5">
+    <h3 class="border-bottom pb-2 mb-4 text-warning">{{ cat }}</h3>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for libro in libros if libro.categoria == cat %}
+        <div class="col">
+            <div class="card book-card border-secondary-subtle h-100">
+                {% if libro.portada %}
+                <img class="book-cover-img" src="{{ libro.portada }}" alt="Portada de {{ libro.titulo }}">
+                {% else %}
+                <div class="book-cover cover-{{ loop.index0 % 6 }}">
+                    {{ libro.titulo }}
+                </div>
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h6 class="card-title mb-1">{{ libro.titulo }}</h6>
+                    <p class="card-text text-secondary small mb-2">{{ libro.autor }}</p>
+                    <p class="card-text small mb-2">
+                        {% if libro.disponible %}
+                        <span class="badge text-bg-success">Disponible</span>
+                        {% else %}
+                        <span class="badge text-bg-danger">Agotado</span>
+                        {% endif %}
+                        <span class="text-secondary">· {{ libro.cantidad }} en stock</span>
+                    </p>
+                    <button type="button" class="btn btn-outline-info btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#libroModal{{ loop.index0 }}{{ loop.index }}">
+                        Detalles
+                    </button>
+                    <div class="mt-auto">
+                        {% if session.get('is_admin') %}
+                        <!-- VISTA DE ADMINISTRADOR -->
+                        <div class="mb-2 small text-secondary">
+                            {% if libro.prestado_a %}
+                            <span class="text-warning">({{ libro.prestado_a | length }} en alquiler activo)</span>
+                            {% endif %}
+                        </div>
+                        <form method="POST" action="{{ url_for('admin_agregar_stock', isbn=libro.isbn) }}">
+                            <div class="input-group input-group-sm mb-1">
+                                <input type="number" name="cantidad_extra" value="1" min="1" class="form-control form-control-sm text-center">
+                                <button type="submit" class="btn btn-outline-warning btn-sm">Añadir Stock</button>
+                            </div>
+                        </form>
+                        {% else %}
+                        <!-- VISTA DE USUARIO NORMAL -->
+                        {% if libro.disponible %}
+                        <form method="POST" action="{{ url_for('prestar', isbn=libro.isbn) }}">
+                            <div class="input-group input-group-sm mb-2">
+                                <label class="input-group-text" for="dias{{ loop.index0 }}{{ loop.index }}">Plazo</label>
+                                <select name="dias" id="dias{{ loop.index0 }}{{ loop.index }}" class="form-select form-select-sm">
+                                    <option value="7">7 días</option>
+                                    <option value="14">14 días</option>
+                                    <option value="21">21 días</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm w-100">Alquilar</button>
+                        </form>
+                        {% else %}
+                        <button type="button" class="btn btn-outline-secondary btn-sm w-100" disabled>No disponible</button>
+                        {% endif %}
                         {% endif %}
                     </div>
-                    <form method="POST" action="{{ url_for('admin_agregar_stock', isbn=libro.isbn) }}">
-                        <div class="input-group input-group-sm mb-1">
-                            <input type="number" name="cantidad_extra" value="1" min="1" class="form-control form-control-sm text-center" title="Cantidad a agregar">
-                            <button type="submit" class="btn btn-outline-warning btn-sm">Añadir Stock</button>
-                        </div>
-                    </form>
-                    {% else %}
-                    <!-- VISTA DE USUARIO NORMAL -->
-                    {% if libro.disponible %}
-                    <form method="POST" action="{{ url_for('prestar', isbn=libro.isbn) }}">
-                        <div class="input-group input-group-sm mb-2">
-                            <label class="input-group-text" for="dias{{ loop.index }}">Plazo</label>
-                            <select name="dias" id="dias{{ loop.index }}" class="form-select form-select-sm">
-                                <option value="7">7 días</option>
-                                <option value="14">14 días</option>
-                                <option value="21">21 días</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-sm w-100">Prestar</button>
-                    </form>
-                    {% else %}
-                    <button type="button" class="btn btn-outline-secondary btn-sm w-100" disabled>No disponible</button>
-                    {% endif %}
-                    {% endif %}
                 </div>
             </div>
+            {{ modal_libro(libro, "libroModal" ~ loop.index0 ~ loop.index) }}
         </div>
-        {{ modal_libro(libro, "libroModal" ~ loop.index) }}
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
+{% endfor %}
 {% endblock %}
